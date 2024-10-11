@@ -1,0 +1,234 @@
+﻿
+
+@{
+    Layout = "_adminLayout";
+
+}
+
+@using Kutuphane.WebUI.Models.User;
+@model UserAddModel
+<div class="content">
+
+    @using (Html.BeginForm("AddUser", "User", FormMethod.Post))
+    {
+        <head>
+            <link href="sumoselect.css" rel="stylesheet">
+
+
+            <style>
+                h2 {
+                    text-align: center;
+                    color: tomato;
+                }
+
+                .field-validation-error {
+                    color: #E80C4D;
+                    font-size: 0.9em;
+                }
+
+                .field-validation-valid {
+                    display: none;
+                    font-size: 0.9em;
+                }
+
+                input.input-validation-error {
+                    border: 1px solid #E80C4D;
+                    font-size: 0.9em;
+                }
+
+                input[type="checkbox"].input-validation-error {
+                    border: 0 none;
+                    font-size: 0.9em;
+                }
+
+                .validation-summary-errors {
+                    color: #E80C4D;
+                    font-weight: bold;
+                    font-size: 0.9em;
+                }
+
+                .validation-summary-valid {
+                    display: none;
+                }
+            </style>
+        </head>
+        <h2>Kullanıcı Ekleme</h2>
+        <div class="container mt-5">
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Adı: </label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.FirstName, new { id = "txtFirstName", @class = "form-control", placeholder = "Kullanıcı Adı Giriniz", @maxlength = "250" })
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                </div>
+                <div class="col-md-1">
+                    <label>Soyadı: </label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.LastName, new { id = "txtLastName", @class = "form-control", placeholder = "Kullanıcı Soyadı Giriniz", @maxlength = "250" })
+                    @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-1">
+                    <label>TC:</label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.TC, new { id = "txtTC", @class = "form-control", minlength = "11", maxlength = "11", placeholder = "Kullanıcı TC Giriniz", onkeypress = "return isNumber(event)" })
+
+                </div>
+                <div class="col-md-1">
+                    <label>Telefon Numarası</label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.PhoneNumber, new { id = "txtPhoneNumber", @class = "form-control ", placeholder = "Telefon Numarası Giriniz", onkeypress = "return isNumber(event)" })
+
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <br />
+                <div class="col-md-1 ">
+                    <label>Kullanıcı Mail</label>
+                </div>
+                <div class="col-md-4 ">
+                    @Html.TextBoxFor(x => x.UserEmail, new { id = "txtUserMail", @class = "form-control", placeholder = "Kullanıcı Mail Yazınız" })
+                    @Html.ValidationMessageFor(x => x.UserEmail, "", new { @class = "text-danger" })
+                    <br />
+                </div>
+                <div class="col-md-1 ">
+                    <label>Kullanıcı Şifre:</label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.UserPassword, new { id = "userPassword", @class = "form-control", placeholder = "Kullanıcı Şifresi Giriniz" })
+                    @Html.ValidationMessageFor(x => x.UserPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <br />
+
+            </div>
+            <div class="row">
+                <div class="col-md-8"> </div>
+                <div class="col col-md-4">
+                    <a class="btn btn-info" role="button" href="/User/Index ">Geri Dön</a>
+                    <button type="submit" class="btn btn-success" OnClick="openPopupAwe()">Kaydet</button>
+                </div>
+            </div>
+        </div>
+        @*</div>*@
+        <br />
+
+        <br />
+
+        @*</div>*@
+        @*</div>*@
+
+
+
+
+    }
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formStudentId">
+                    <partial name="_Create" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*<form method="post" action="/Book/Upload" enctype="multipart/form-data">
+            <input type="file" name="pic" /><br />
+            <input type="text" name="fullname" /> <br />
+            <input type="submit" value="Kaydet" />
+            <a class="btn btn-primary" style="margin-left:1400px;" href="/Book/Index" role="button">Link</a>
+
+        </form>*@
+    <!--<div class="container">
+        <div class="row">
+            <div class="col-md-1">
+                <label>Fotoğraf</label>
+            </div>
+            <div class="col-md-4 imgUp">
+                <div class="imagePreview"></div>
+                <label class="btn btn-primary">
+                    Upload<input id="myImg" name="pic" type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" accept=".jpg">
+                    <input type="file" name="pic"/>
+
+                    <form method="post" asp-action="Upload" asp-controller="Home" enctype="multipart/form-data"></form>
+                </label>
+            </div>-->
+    <!-- col-2 -->
+    <!--<div class="col-md-4">
+        <input type="submit" value="Fotoğrafı Ekle" />
+    </div>-->
+    @*</div>
+        </div>*@
+
+
+</div>
+
+<script>
+    //Sadece digit(Numeric) karakter giriş izni
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+@*<script>
+        function openPopupAwe() {
+            awe.open("popupAwe",
+                {
+                    setCont: function (sp, o) {
+                        //console.log(utils.getParams(sp));
+
+                        var cont = $('<div style="padding: 0 3em;">Are you sure you want to perform this action?</div>');
+                        o.scon.html(cont);
+                    },
+                    btns: [
+                        {
+                            text: 'Yes',
+                            ok: 1, // add okbtn class
+                            action: function () {
+                                $(this).data('api').close();
+                            }
+                        },
+                        {
+                            text: 'No',
+                            action: function () {
+                                $(this).data('api').close();
+                            }
+                        }],
+                    height: 200,
+                    width: 700,
+                    title: 'please confirm',
+                    modal: true,
+                    //params: { p: 123 }
+                    //top: true,
+                    //close: function() { console.log('popup closed'); },
+                    //url: '@Url.Action("Popup1")', // works if setCont and content not set
+                    //content: 'hello world'
+                    //outClickClose: true,
+                    //popupClass: 'class1',
+                    //fullscreen: true
+                });
+        }
+    </script>*@
+
+
+

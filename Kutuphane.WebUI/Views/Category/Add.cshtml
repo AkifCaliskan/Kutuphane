@@ -1,0 +1,96 @@
+﻿
+
+@{
+    Layout = "_adminLayout";
+
+}
+
+
+@using Kutuphane.WebUI.Models.Category;
+@model CategoryAddModel
+<div class="content">
+
+    @using (Html.BeginForm("Add", "Category", FormMethod.Post))
+    {
+        <head>
+            <link href="sumoselect.css" rel="stylesheet">
+
+
+            <style>
+                h2 {
+                    text-align: center;
+                    color: tomato;
+                }
+
+                .field-validation-error {
+                    color: #E80C4D;
+                    font-size: 0.9em;
+                }
+
+                .field-validation-valid {
+                    display: none;
+                    font-size: 0.9em;
+                }
+
+                input.input-validation-error {
+                    border: 1px solid #E80C4D;
+                    font-size: 0.9em;
+                }
+
+                input[type="checkbox"].input-validation-error {
+                    border: 0 none;
+                    font-size: 0.9em;
+                }
+
+                .validation-summary-errors {
+                    color: #E80C4D;
+                    font-weight: bold;
+                    font-size: 0.9em;
+                }
+
+                .validation-summary-valid {
+                    display: none;
+                }
+            </style>
+        </head>
+        <h2>Kategori Ekleme</h2>
+        <div class="container mt-5">
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Kategori Adı: </label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.CategoryName, new { id = "txtCategoryName", @class = "form-control", placeholder = "Kategori Adı Giriniz", onkeypress = "return isString(event)"})
+                    @Html.ValidationMessageFor(x => x.CategoryName, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8"> </div>
+            <div class="col col-md-4">
+                <a class="btn btn-info" role="button" href="/Category/Index ">Geri Dön</a>
+                <button type="submit" class="btn btn-success" OnClick="openPopupAwe()">Kaydet</button>
+
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    //Sadece digit(Numeric) karakter giriş izni
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+
+

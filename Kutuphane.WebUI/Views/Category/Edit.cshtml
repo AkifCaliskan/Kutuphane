@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "_adminLayout";
+}
+@using Kutuphane.WebUI.Models.Category;
+@model CategoryEditModel
+
+<head>
+    <style>
+        h2 {
+            text-align: center;
+            color: tomato;
+        }
+    </style>
+</head>
+
+<div class="content">
+    @using (Html.BeginForm("Edit", "Category", FormMethod.Post))
+    {
+        <h2>Kategori Düzenleme</h2>
+        <div class="container mt-5">
+
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Kullanıcı:</label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.CategoryName, new { id = "CategoryName", @class = "form-control", placeholder = "Lütfen Kategori Adını Giriniz" })
+                    @Html.ValidationMessageFor(x => x.CategoryName)
+                </div>
+
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-8"> </div>
+                <div class="col col-md-4">
+                    <a class="btn btn-info" role="button" href="/Category/Index ">Geri Dön</a>
+                    <button type="submit" class="btn btn-success" OnClick="openPopupAwe()">Kaydet</button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            $('#issuedate').datetimepicker({
+                format: 'YYYY-MM-DD hh:mm:ss'
+            });
+            $('#startdatetime-from').datetimepicker({
+                language: 'en',
+                format: 'yyyy-MM-dd hh:mm'
+            });
+        </script>
+
+
+    }
+</div>

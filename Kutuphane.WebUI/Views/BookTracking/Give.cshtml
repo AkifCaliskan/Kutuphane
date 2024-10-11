@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "_adminLayout";
+}
+@using Kutuphane.WebUI.Models.Operations;
+@model BookGiveModel
+<head>
+    <style>
+        h2{
+            text-align:center;
+            color:tomato;
+        }
+    </style>
+</head>
+<div class="content">
+    @using (Html.BeginForm("Give", "BookTracking", FormMethod.Post))
+    {
+        <br />
+
+        <h2>Kitap Ödünç Alma</h2>
+        <div class="container mt-5">
+
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Kullanıcı:</label>
+                </div>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.UserId, ViewBag.UserId as List<SelectListItem>, new { id = "txtUserName", @class = "form-control", placeholder = "Kullanıcı Seçiniz" })
+                    @Html.ValidationMessageFor(x => x.UserId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1">
+                    <label>Veriliş tarihi:</label>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.İssueDate, new { id = "issuedate", @class = "form-control fc-datepicker ", Type = "datetime-local", placeholder = "Lütfen Tarih Giriniz." })
+                    @Html.ValidationMessageFor(x => x.İssueDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Kitap:</label>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DropDownListFor(x => x.BookId, ViewBag.BookId as List<SelectListItem>, new { id = "bookid", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.BookId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-1">
+                    <label>Alış Tarihi</label>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.ReturnTime, new { id = "returndate", @class = "form-control  fc-datepicker ", Type = "datetime-local", placeholder = "Lütfen Tarih Giriniz." })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8"> </div>
+                <div class="col col-md-4">
+                    <a class="btn btn-info" role="button" href="/BookTracking/Index">Geri Dön</a>
+                    <button type="submit" class="btn btn-success" OnClick="openPopupAwe()">Kaydet</button>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    }
+</div>
